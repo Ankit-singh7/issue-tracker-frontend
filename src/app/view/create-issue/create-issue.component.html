@@ -1,0 +1,115 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+   
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger nav-border">
+
+        <a class="navbar-brand nav-brand title-1" href="#">Trock</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav navbar-nav  ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
+              </li>
+            <li class="nav-item">
+            </li>
+       
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/']">Logout</a>
+          </li>
+
+
+
+
+
+        </ul>
+
+      </div>
+    </nav>
+    </div>
+
+  </div>
+
+
+  <div class="row form-div" style="text-align:left">
+
+    
+      <div class="col-12 text-center title-div">
+        <h2 class="title">Create a new Issue</h2>
+
+      </div>
+      
+  
+
+      <div class="col-md-10 offset-lg-1 offset-md-1  offset-sm-1  ">
+        <form #createIssueForm="ngForm" (ngSubmit)="newIssue()" enctype="multipart/form-data">
+  
+          <div class="form-group">
+  
+  
+            <label style="color:white;font-weight:bolder">Issue Title</label>
+            <input  [(ngModel)]="issueTitle" #title="ngModel" type="Title" class="form-control input-box validate" [ngModelOptions]="{standalone: true}" required>
+  
+          </div>
+         
+         
+  
+          <div class="form-group box">
+            <label style="color:white;font-weight:bolder">description</label>
+           
+            <app-ngx-editor [placeholder]="'Enter description here...'" height="150px"  [spellcheck]="true" [(ngModel)]="description" #issueDescription="ngModel" [ngModelOptions]="{standalone: true}"  class="descrip"></app-ngx-editor>
+          </div>
+        
+
+          
+  
+          
+          <div class="form-group">
+            <label style="color:white;font-weight:bolder">Assignee</label>
+                         
+                <select  [(ngModel)]="assignee" class="custom-select form-control input-box" id="inputGroupSelect01" [ngModelOptions]="{standalone: true}"  required>
+                     <option selected>Choose...</option>
+                                 
+                    <option  *ngFor="let user of users2" value="{{user.firstName}} {{user.lastName}}">
+                           <p>{{user.firstName}} {{user.lastName}}</p>
+                    </option>
+               </select>
+  
+          </div>
+
+          <div class="form-group">
+            <label style="color:white;font-weight:bolder">Status</label>
+             <select  [(ngModel)]="status" class="custom-select form-control input-box" id="inputGroupSelect01" [ngModelOptions]="{standalone: true}" required>
+                <option selected>Choose...</option>
+                <option value="backlog">backlog</option>
+                <option value="in-progress">in-progress</option>
+                <option value="in-test">in-test</option>
+                <option value="done">done</option>
+            </select>
+
+        </div>
+
+           
+          <br>
+          <br>
+          
+        
+  
+          <button type="submit" class="btn btn-default btn-primary submit" [disabled]="!createIssueForm.form.valid" >Add a query</button>
+      
+        </form>
+       
+      </div>
+  
+    </div>
+
+
+</div>
+

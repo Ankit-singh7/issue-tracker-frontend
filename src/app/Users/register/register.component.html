@@ -1,0 +1,159 @@
+
+
+    <div class="container-fluid">
+      <br>
+    
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top ">
+          <a class="navbar-brand nav-brand" href="/">Trock</a>
+    
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="nav navbar-nav ml-auto"> 
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/about']">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/login']">Login</a>
+              </li>
+        
+          </ul>
+    
+        </div>
+      </nav>
+     <br>
+     <br>
+      
+    <div class="row p-0 m-0 ">
+    
+        <div class="col-sm"></div>
+      
+        <div class="col-sm p-5 form-div">
+          
+
+            <div class="row">
+            
+                <div class="col-12 text-center">
+                  <h1 class="title">Trock</h1>
+                  <p class="description">A issue tracking tool</p>
+                </div>
+              </div>
+    
+          
+      
+         <h4 style="color:white">Sign Up for Free</h4>
+      
+      
+          <input type="text" id="firstName" class="form-control  input-box" [(ngModel)]="firstName" #first="ngModel" pattern="^[A-Z][A-za-z ]+$" minlength="2" placeholder="first name" required autofocus>
+          <br>
+          <div [hidden]="first.pristine || first.valid" class="alert alert-danger">
+           <div *ngIf="first.errors?.pattern">
+                Warning : Please tart with Capital and contain only letters !
+             <div *ngIf="first.errors?.minlength">
+              Warning : Minimum 2 letters required!
+            </div>
+           </div>
+          <div *ngIf="first.errors?.required">
+              Warning : First Name is required!
+         </div>
+
+         </div>
+          
+          <input type="text" id="lastName" class="form-control  input-box" [(ngModel)]="lastName" #last="ngModel" pattern="^[A-Z][A-za-z ]+$" minlength="2"  placeholder="last name" required >
+          <br>
+          <div [hidden]="last.pristine || last.valid" class="alert alert-danger">
+            <div *ngIf="last.errors?.pattern">
+                  Warning : Please tart with Capital and contain only letters !
+              <div *ngIf="last.errors?.minlength">
+                  Warning : Minimum 2 letters required!
+              </div>
+            </div>
+           <div *ngIf="last.errors?.required">
+              Warning : Last Name is required!
+          </div>
+          </div>
+        
+          <input type="email" id="inputEmail" class="form-control  input-box" [(ngModel)]="email" #emailId="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  placeholder="Email address" required >
+          <br>
+          <div [hidden]="emailId.valid || emailId.pristine" class="alert alert-danger">
+            <div *ngIf="emailId.errors?.pattern">
+             Warning : Email is invalid!
+      
+            </div>
+            <div *ngIf="emailId.errors?.required">
+             Warning : Email is required!
+            </div>
+          </div>
+        
+          <input type="password" id="inputPassword" class="form-control  input-box" [(ngModel)]="password"  #pass="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password" required>
+          <br>
+          
+          <div [hidden]="pass.valid || pass.pristine" class="alert alert-danger">
+            <div *ngIf="pass.errors?.pattern">
+             Warning : Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters!
+            </div>
+            <div *ngIf="pass.errors?.required">
+             Warning : Password is required!
+            </div>
+          </div>
+        
+          <input type="password" id="confirmPassword" class="form-control  input-box" [(ngModel)]="confirmPassword"  #conPass="ngModel"   placeholder="confirm Password" required>
+          <br>
+          
+          <div [hidden]="conPass.pristine || password==confirmPassword" class="alert alert-danger">
+            <div *ngIf="password!=confirmPassword">
+               Warning : Password and Confirm Password does not match!
+            </div>
+           <div *ngIf="conPass.errors?.required">
+               Warning: Confirm Password is required!
+           </div>
+         </div>
+         
+         <select [(ngModel)]="countryName" #Country="ngModel"  name="countryName" class="form-control  input-box" 
+          id="inputCountry" (change)="onChange()" required>
+          <option value="" >Select</option>
+          <option *ngFor="let country of finalCountryList" [value]="country.key">{{country.value}}</option>
+          </select>
+          <br>
+            
+           <div [hidden]="Country.valid || Country.pristine  " class="alert alert-danger">
+             ** Country Name is required 
+          </div>
+        
+          <div class="input-group">
+            <div class="input-group-text">+{{code}}</div>
+            <input type="number" #mobileNum="ngModel" pattern="^\d{10}$" id="inputMobile" class="form-control input-box" name="mobile" [(ngModel)]="mobileNumber"
+            placeholder="Mobile" required>
+          </div>
+     
+    
+        
+          <div [hidden]="mobileNum.valid || mobileNum.pristine" class="alert alert-danger">
+          <div *ngIf="mobileNum.errors?.pattern">
+            Mobile Number should only start contain only 10 digits!
+    
+          </div>
+          <div *ngIf="mobileNum.errors?.required">
+            Mobile Number is required!
+          </div>
+        </div>
+        <br>
+         
+          <button class="btn btn-lg btn-primary btn-block submit " type="button" (click)="signupFunction()">Get Started</button>
+    
+      
+        </div>
+       
+      
+        <div class="col-sm"></div>
+      
+      </div>
+      <br><br>
+      
+    </div>
+    
+    
+    

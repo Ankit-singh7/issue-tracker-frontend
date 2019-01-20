@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Luckiest+Guy');
+
+.container-fluid{
+  height:100%;
+}
+
+
+
+.title-1
+{
+    font-family: 'Luckiest Guy', cursive;
+    color:white;
+}
+
+
+
+
+.nav-border
+{
+    border-radius:0 0 10px 10px;
+}
+
+table {
+    width: 100%;
+  }
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .header{
+    background-color:#db5964;
+    color: white;
+    padding: 2%;
+    text-align: center;
+  }
+  .navbar{
+    cursor: pointer;
+  }
+
+
+  .user{
+    background-color:#4eb9c7;
+    color:black;
+    padding:5%;
+    display:block;
+    width:100%;
+    font-size:1.2em;
+    text-align:center;
+    font-family:sans-serif;
+  }
+
+
+  .fasquare{
+    float: center;
+    margin-top:3%;
+  }
+  .fasquare:hover{
+    color:rgb(22, 83, 37);
+    cursor:pointer;
+  }
+
+  .aside{
+    background:  #f5f5f5;
+    overflow:auto;
+    margin-top:2%;
+  }
+
+  .aside1{
+    overflow:auto;
+    margin-top:2%;
+  }
+
+  .box
+  {
+    height:100vh;
+  }
+

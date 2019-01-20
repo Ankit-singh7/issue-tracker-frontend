@@ -1,0 +1,118 @@
+<div class="container-fluid">
+        <div class="row">
+                <div class="col-12">
+               
+            
+            
+                <nav class="navbar navbar-expand-lg navbar-dark bg-danger nav-border">
+            
+                    <a class="navbar-brand nav-brand title-1" href="#">Trock</a>
+            
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+            
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav  ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
+                          </li>
+                        <li class="nav-item">
+                        </li>
+                   
+                      <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/']">Logout</a>
+                      </li>
+            
+            
+            
+            
+            
+                    </ul>
+            
+                  </div>
+                </nav>
+                </div>
+            
+              </div>
+              <br>
+
+              
+                    <div class="col-1 float-right"><a  (click)="deleteIssue()"  style="padding-right:10px">
+                        <i class="fa fa-trash fa-lg" style="color:#dc3545" ></i>
+                  </a> 
+                </div>
+                  <div class="col-11 float-right"><a [routerLink]="['/editIssue',issueDetails.issueId]" class="float-right"  >
+                    <i class="fa fa-edit fa-lg edit1" ></i>
+                </a>
+            </div>
+
+        <br><br><br>
+        <div class="container">
+            <div style="border-bottom:1px solid grey">
+<div class="row">
+    
+        <div class="row" >
+            <div class="col-lg-3 col-sm-12 text-center" >
+                    <p style="font-size:20px;color:#1cd3a2"><b>{{issueDetails.reporterName}}</b><br>
+                        <span class="text-secondary " style="font-size:15px">{{issueDetails.reportedOn |  date:'medium' }}</span></p>
+             
+            </div>
+            <div class="col-lg-9 col-sm-12 text-left">
+                    <div class="row">
+                 <div class="col-10">
+                        <p style="font-size:20px;color:#1cd3a2">{{issueDetails.issueTitle}}  <a class="btn float-right" (click)=addAsWatcher(issueId)><i class="fa fa-eye" style="color:#1cd3a2" aria-hidden="true"></i><b style="margin-left:5px">Watch</b></a> </p>
+                     
+                 </div>
+                 <div class="col-sm-12">
+                    <span class="text-secondary text-left" style="font-size:15px">{{issueDetails.description}}</span>
+                 </div>
+                 
+                        
+                  <div class="col-12" style="margin-top:15px">
+                                <p class="text-secondary text-left" style="font-size:20px"><b>Assigned to-</b><span style="font-size:20px;color:#1cd3a2"><b>{{issueDetails.assignee}}</b></span></p>
+                                <p class="text-secondary text-left"><b>Status-<span style="color:#1cd3a2">{{issueDetails.status}}</span></b></p>
+                                <p class="text-left" *ngIf="issueDetails.watchers">
+                                <b class="text-secondary text-left">Watchers:</b>
+                                        <span *ngFor="let watcher of issueDetails.watchers; let i = index">
+                                <b style="color:#1cd3a2" > {{watcher.watcherName}}</b>
+                                </span></p>
+                  </div>
+                </div>
+             </div>
+         </div>
+    </div>
+</div>
+<br>
+
+<div class="row" >
+ <div class="container">     
+    <div class="col-12">
+           <div class="scrollbar scrollbar-primary">
+                <div class="force-overflow">
+                    <div *ngFor="let comment of AllCommentsOfIssue">
+                        <div *ngIf="comment" style="border-bottom:1px solid #1cd3a2">
+                            <span style="color:#1cd3a2"><b>{{comment.userName}}</b></span><br>
+                            <span>{{comment.commentedOn |  date}}</span>
+                            <span class="text-secondary" style="margin-left:15px"><b>{{comment.comment}}</b></span><br>
+                        <br><br> 
+                        </div>
+
+                        <br>
+                        
+                    </div>    
+                </div>
+            </div>
+      </div>
+      <div class="col-12" style="height:15vw">
+            
+                <app-ngx-editor class="textarea float-right" height="150px" [(ngModel)]="comment" placeholder="Type your comment"></app-ngx-editor>
+            
+                <button type="button" class="btn  btn-primary float-right" style="margin-top:20px"  (click)=addNewComment()>Send</button>
+           
+      </div>
+  </div>
+</div>
+    
+</div>

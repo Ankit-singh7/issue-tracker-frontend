@@ -1,0 +1,191 @@
+<div class="container-fluid">
+
+  <div class="row"> 
+     <div class="col-12">
+ 
+         <nav class="navbar navbar-expand-lg navbar-dark bg-danger nav-border">
+             <a class="navbar-brand nav-brand title-1" href="#">Trock</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                </button>
+             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav  ml-auto">
+               
+                   <li>
+                     <input class="form-control bug-search" [(ngModel)]="bug" [placeholder]="placeholderText" aria-label="Search">
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
+                 </li>
+                   <li class="nav-item active">
+                     <a class="nav-link" [routerLink]="['/createIssue']">New Issue+</a>
+                  </li>
+                  <li class="nav-item active">
+                         <a  class="nav-link" data-toggle="modal" data-target="#myModal1">My Issues</a>
+                  </li>
+ 
+                  <li class="nav-item  active">
+                         <a  class="nav-link" data-toggle="modal" data-target="#myModal2">Other Issues</a>
+                  </li>
+ 
+                
+                  <li class="nav-item">
+                    <a class="nav-link" (click)="logout()">Logout</a>
+                  </li>
+               </ul>
+            </div>
+        </nav>
+     </div>
+ </div>
+ 
+ 
+ 
+ 
+   <!--Modal to show issues repoted by me-->
+ 
+   <div id="myModal1" class="modal fade" role="dialog"  tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+           <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                   <div class="modal-header text-center text-white bg-danger">
+                       <h4 class="modal-title w-100 font-weight-bold">Issues Reported by Me</h4>
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                       </button>
+                   </div>
+ 
+ 
+                   <div>
+ 
+                       <table class="table table-info">
+                           <thead>
+                           <tr>
+                               <th scope="col">Status</th>
+                               <th scope="col">Title</th>
+                               <th scope="col">Reporter</th>
+                               <th scope="col">Date</th>
+                           </tr>
+                           </thead>
+                           <tbody *ngFor="let issue of reportedIssue">
+                           <tr style="cursor: pointer;" routerLink="/issueDetails/{{issue.issueId}}"  data-dismiss="modal">
+                               <td class="text-secondary"><b>{{issue.status}}</b></td>
+                               <td class="text-secondary"><b>{{issue.issueTitle}}</b></td>
+                               <td class="text-secondary"><b><span class="text-success">{{issue.reporterName}}</span></b></td>
+                               <td class="text-secondary"><b>{{issue.reportedOn|date}}</b></td>
+                           </tr>
+                           </tbody>
+                       </table>
+       
+                   </div>
+           
+           
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+               </div>
+           </div>
+   </div>
+   <div class="container" style="margin-top:5px">
+       <div class="row">
+           <div class="col-12 bg-secondary" style="border-radius:20px;">
+               <marquee style="color:white;font-size:20px;margin:2px">Welcome <span class="text-warning">{{fullName}}</span> to the world of developers.Enjoy the Toker issue tracking app.</marquee>
+           </div>
+       </div>
+   </div>
+ 
+ 
+   <!--Modal to show issues related to other users-->
+ 
+   <div id="myModal2" class="modal fade" role="dialog"  tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+           <div class="modal-content">
+               <div class="modal-header text-center bg-danger text-light">
+                   <h4 class="modal-title w-100 font-weight-bold">Other Issues</h4>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+               </div>
+ 
+ 
+               <div>
+ 
+                   <table class="table table-primary">
+                       <thead>
+                       <tr>
+                           <th scope="col">Status</th>
+                           <th scope="col">Title</th>
+                           <th scope="col">Reporter</th>
+                           <th scope="col">Date</th>
+                       </tr>
+                       </thead>
+                       <tbody *ngFor="let issue of otherUsersRealatedIssue;">
+                       <tr style="cursor: pointer;" routerLink="/issueDetails/{{issue.issueId}}"  data-dismiss="modal">
+                           <td>{{issue.status}}</td>
+                           <td><b>{{issue.issueTitle}}</b></td>
+                           <td><span class="text-success"><b>{{issue.reporterName}}</b></span></td>
+                           <td>{{issue.reportedOn|date}}</td>
+                       </tr>
+                       </tbody>
+                   </table>
+   
+               </div>
+ 
+ 
+           </div>
+       </div>
+   </div>
+ 
+ 
+ 
+ 
+     <div class="table-responsive col-md-12 aside1">
+         <div>
+ 
+               <p style="font-size:20px;margin-bottom:-5px;color:#1cd3a2"><span><b>All Issues</b></span> <p>
+               <table class="table table-info" style="border-radius:10px">
+                   <thead>
+                   <tr>
+                     <th scope="col">Status <i class="fa fa-sort" style="cursor: pointer;" (click)="changeOrder('status')"></i></th>
+                     <th scope="col">Title <i class="fa fa-sort" style="cursor: pointer;" (click)="changeOrder('issueTitle')"></i></th>
+                     <th scope="col">Reporter <i class="fa fa-sort" style="cursor: pointer;" (click)="changeOrder('reporterName')"></i></th>
+                     <th scope="col">Date <i class="fa fa-sort" style="cursor: pointer;" (click)="changeOrder('reportedOn')"></i></th>
+                   </tr>
+                 </thead>
+                 
+                 <tbody *ngFor="let issue of AllIssues | filter:'issueTitle,reporterName,status,reportedOn': bug | sortBy: sortOrder : field   | filterBy: filterName | paginate: { itemsPerPage: 6, currentPage: p }" >
+                 
+                   <tr  style="cursor: pointer;" routerLink="/issueDetails/{{issue.issueId}}">
+                     <td class="text-secondary"><b>{{issue.status}}</b></td>
+                     <td class="text-secondary" ><b>{{issue.issueTitle}}</b></td>
+                     <td class="text-secondary"><b>{{issue.reporterName}}</b></td>
+                     <td class="text-secondary"><b>{{issue.reportedOn|date:'medium'}}</b></td>
+                   </tr>
+                 </tbody>
+               </table>
+               <div class="text-center">
+               <pagination-controls  (pageChange)="p = $event" ></pagination-controls>
+               </div>
+ 
+ 
+ 
+         </div>
+ 
+ 
+ 
+ 
+ 
+ 
+     </div>
+ 
+ 
+   </div>
+ 
+ 
+ 
+ 
+ 
+ 
